@@ -1,0 +1,29 @@
+import cv2
+import numpy as np
+import time
+from win32api import GetSystemMetrics
+import pyautogui
+dur=int(input("Enter the duration to screen recording"))
+w=GetSystemMetrics(0) #This line is calculate width of screen.
+h=GetSystemMetrics(1) #This line is calculate height of screen.
+dim=(w,h)  #this is dimension width X height
+f=cv2.VideoWriter_fourcc(*"XVID") #This line is use to formate of recording
+#XVID contains audio,video etc.
+output=cv2.VideoWriter("test.mp4",f,30.0,dim) #this line file name,formate,30 screenshort in given dimension
+#this is calculating current time
+stime=time.time()
+#etime is end time ( start time +5 sec(for interpetet the code))
+etime=stime+dur+5
+while True:
+    #it takes screen shot
+    img=pyautogui.screenshot()
+    #all image store into the array
+    frame1=np.array(img)
+    #this function is used to discolor the image
+    frame=cv2.cvtColor(frame1,cv2.COLOR_BGR2RGB)
+    output.write(frame)
+    ctime=time.time()
+    if ctime>etime:
+        break
+output.release()
+print("---end---")
