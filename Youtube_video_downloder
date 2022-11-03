@@ -1,0 +1,11 @@
+from pytube import YouTube
+link=input("Enter the link of youtube video")
+youtube1=YouTube(link)
+videos=youtube1.streams.all()
+vid=list(enumerate(videos))
+for i in vid:
+    print(i)
+print()
+s=int(input("Enter the quality"))
+videos[s].download()
+print("successfully")
