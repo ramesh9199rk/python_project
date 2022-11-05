@@ -1,0 +1,58 @@
+from tkinter import *
+from tkinter import ttk
+from googletrans import Translator,LANGUAGES 
+
+#I am change any engilsh to hindi.
+def change(text='type',src='English',dest='Hindi'):
+    text1=text
+    trans=Translator()
+    src1=src
+    dest1=dest
+    trans1=trans.translate(text,src=src1,dest=dest1)
+    return trans.text
+def data():
+    s=combo.get()
+    d=combo2.get()
+    msg=s1.get(1.0,END)
+    textget=change(text=msg,src=s,dest=d)
+    #deletion must be needed.
+    
+    s2.delete(1.0,END)
+    s2.insert(END,textget)
+    
+root=Tk()
+root.title("Translator")
+root.geometry("500x700")
+root.config(bg='red')
+l1=Label(root,text="Translator",font=("Time New Roman",40,"bold"),bg='red')
+l1.place(x=100,y=40,height=50,width=300)
+
+frame=Frame(root).pack(side=BOTTOM)
+l1=Label(root,text="Source Text",font=("Time New Roman",20,"bold"),fg='black',bg='red')
+l1.place(x=100,y=100,height=20,width=300)
+
+s1=Text(frame,font=("Time New Roman",40,"bold"),wrap=WORD)
+s1.place(x=10,y=130,height=150,width=480)
+
+list_text=list(LANGUAGES.values())
+combo=ttk.Combobox(frame,value=list_text)
+combo.place(x=10,y=300,height=40,width=150)
+combo.set('english')
+
+button=Button(frame,text='Translate',relief=RAISED,command=data)
+button.place(x=170,y=300,height=40,width=150)
+
+combo2=ttk.Combobox(frame,value=list_text)
+combo2.place(x=330,y=300,height=40,width=150)
+combo2.set('hindi')
+
+l2=Label(root,text="destination",font=("Time New Roman",30,"bold"),bg='red')
+l2.place(x=30,y=360,height=40,width=480)
+
+
+
+
+s2=Text(frame,font=("Time New Roman",40,"bold"),wrap=WORD)
+s2.place(x=10,y=420,height=150,width=480)
+
+root.mainloop()
