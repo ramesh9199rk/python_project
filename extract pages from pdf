@@ -1,0 +1,14 @@
+#make sure that you have pikepdf api.if not then you can install from pip install pikepdf
+
+from pikepdf import Pdf,Name,PdfImage
+#python.pdf make sure in same folder ,if not then give full path.
+old_pdf=Pdf.open("python.pdf")
+#give page pages from where you wants to extract image.
+page1=old_pdf.pages[0]
+#printing how many image present in the particular pages.
+print(list(page1.images.keys()))
+#we want download only /Image5.
+raw_image=page1.images['/Image5']
+img=PdfImage(raw_image)
+#save the image name logo.png
+img.extract_to(fileprefix="logo")
